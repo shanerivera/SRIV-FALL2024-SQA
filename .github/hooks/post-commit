@@ -9,7 +9,7 @@ echo "==============================================================="
 if [ -f "bandit_report.csv" ]; then
   echo "Adding Bandit report..."
   git add bandit_report.csv
-  git commit -m "Add/update Bandit report"
+  git commit --amend --no-edit
   git push
 else
   echo "No Bandit report found, skipping push."
