@@ -1,0 +1,43 @@
+
+# To enable this hook, rename this file to "pre-commit".
+
+# Cppcheck hook
+#echo "================================"
+#echo "Started code scanning with static analysis tool"
+#echo "================================"
+#cppcheck /mnt/c/Users/srivs/Auburn/SQA/SRIV-FALL2024-SQA
+#echo "================================"
+#echo "Finished code scanning with static analysis tool"
+#echo "================================"
+
+
+#!/bin/sh
+
+# Get a list of Python files that have been staged for commit
+files=$(git diff --cached --name-only --diff-filter=ACM | grep -E '\.py$')
+
+if [ -n "$files" ]; then
+  echo "Running Bandit on staged Python files..."
+
+  # Run Bandit on the staged files and generate a CSV report
+  bandit -r $files -f csv -o bandit_report.csv
+
+  # Check if Bandit found any issues
+  result=$?
+
+  # If Bandit finds issues, display them and prevent commit
+  if [ $result -ne 0 ]; then
+    echo "Bandit found security issues in your code. Please check the report."
+    exit 1
+  else
+    echo "No security issues found. Commit can proceed."
+  fi
+fi
+
+
+
+
+
+
+
+
