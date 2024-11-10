@@ -1,0 +1,13 @@
+#!/bin/bash
+
+# Generate Bandit report
+bandit -r . -f csv -o bandit_report.csv
+
+# Add the report to the staging area
+git add bandit_report.csv
+
+# Commit the report if there are any changes
+if [ -n "$(git status --porcelain bandit_report.csv)" ]; then
+    git commit -m "Add Bandit security report"
+    git push origin master  # Adjust the branch name as needed
+fi
