@@ -5,6 +5,9 @@ on:
     branches:
       - main
       - 'feature/*'
+    # Optionally specify paths to only trigger the action when Python files change
+    paths:
+      - '**/*.py'  # This ensures the action runs only when Python files change
 
 jobs:
   bandit:
@@ -13,6 +16,11 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.12'  # You can change the version if needed
 
       - name: Install Bandit
         run: |
@@ -24,7 +32,8 @@ jobs:
           bandit -r . -f csv -o bandit_report.csv
 
       - name: Upload Bandit report
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: bandit-report
           path: bandit_report.csv
+
