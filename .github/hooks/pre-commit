@@ -5,7 +5,7 @@ echo "Started pre-commit with bandit security analysis"
 echo "==============================================================="
 
 # Run Bandit
-bandit -r . -o bandit_report.csv
+bandit -r . -o bandit_report.csv -f csv
 
 # Check if the Bandit report was generated
 if [ -f "bandit_report.csv" ]; then
