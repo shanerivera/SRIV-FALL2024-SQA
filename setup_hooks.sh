@@ -12,7 +12,7 @@ cp .github/hooks/pre-commit .git/hooks/pre-commit
 chmod +x .git/hooks/pre-commit
 
 # Copy post-commit hook
-cp .github/hooks/post-commit .git/hooks/post-commit
-chmod +x .git/hooks/post-commit
+#cp .github/hooks/post-commit .git/hooks/post-commit
+#chmod +x .git/hooks/post-commit
 
 echo "Git hooks have been set up."

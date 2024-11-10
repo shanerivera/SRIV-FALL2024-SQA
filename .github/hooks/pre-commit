@@ -1,44 +1,20 @@
-
-# To enable this hook, rename this file to "pre-commit".
-
-# Cppcheck hook
-#echo "================================"
-#echo "Started code scanning with static analysis tool"
-#echo "================================"
-#cppcheck /mnt/c/Users/srivs/Auburn/SQA/SRIV-FALL2024-SQA
-#echo "================================"
-#echo "Finished code scanning with static analysis tool"
-#echo "================================"
+#!/bin/bash
 
 echo "==============================================================="
 echo "Started pre-commit with bandit security analysis"
 echo "==============================================================="
 
-#!/bin/bash
+# Run Bandit
+bandit -r . -o bandit_report.csv
 
-# Define the output report file
-REPORT_FILE="bandit_report.csv"
-
-# Run Bandit on the entire repository and generate the CSV report
-echo "Running Bandit on Python files..."
-bandit -r . -f csv -o "$REPORT_FILE"
-
-# Check if Bandit found any issues (you can adjust this condition as needed)
-if [ -s "$REPORT_FILE" ]; then
-  echo "Bandit found security issues. Please review the report:"
-  cat "$REPORT_FILE"
-  # Optionally, you can abort the commit if you want to prevent it
-  # exit 1
+# Check if the Bandit report was generated
+if [ -f "bandit_report.csv" ]; then
+  echo "Adding Bandit report..."
+  git add bandit_report.csv
 else
-  echo "No security issues found by Bandit."
+  echo "No Bandit report found."
 fi
 
 echo "==============================================================="
-echo "Finished bandit security analysis / pre-commit check"
+echo "Finished pre-commit"
 echo "==============================================================="
-
-
-
-
-
-
