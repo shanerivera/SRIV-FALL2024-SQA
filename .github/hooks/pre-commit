@@ -4,16 +4,24 @@ echo "==============================================================="
 echo "Started pre-commit with bandit security analysis"
 echo "==============================================================="
 
+# Save the original timestamp of the Bandit report
+original_timestamp=$(stat -c %Y bandit_report.csv)
+
 # Run Bandit
 bandit -r . -o bandit_report.csv -f csv
 
+# Get the new timestamp
+new_timestamp=$(stat -c %Y bandit_report.csv)
+
+
+
 # Check if the Bandit report was generated
-if [ -f "bandit_report.csv" ]; then
-  echo "Adding Bandit report..."
+if [ "$original_timestamp" -ne "$new_timestamp" ]; then
+  echo "*Updating Bandit report...*"
   git add bandit_report.csv
-  echo "Bandit report added to commit."
+  echo "*Bandit report added to commit.*"
 else
-  echo "No Bandit report found."
+  echo "*No updates to Bandit report needed*."
 fi
 
 echo "==============================================================="
