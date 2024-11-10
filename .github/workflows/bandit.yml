@@ -1,0 +1,30 @@
+name: Bandit Security Check
+
+on:
+  push:
+    branches:
+      - main
+      - 'feature/*'
+
+jobs:
+  bandit:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install Bandit
+        run: |
+          python -m pip install --upgrade pip
+          pip install bandit
+
+      - name: Run Bandit on Python files
+        run: |
+          bandit -r . -f csv -o bandit_report.csv
+
+      - name: Upload Bandit report
+        uses: actions/upload-artifact@v2
+        with:
+          name: bandit-report
+          path: bandit_report.csv
