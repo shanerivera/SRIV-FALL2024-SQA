@@ -11,6 +11,7 @@ bandit -r . -o bandit_report.csv -f csv
 if [ -f "bandit_report.csv" ]; then
   echo "Adding Bandit report..."
   git add bandit_report.csv
+  echo "Bandit report added to commit."
 else
   echo "No Bandit report found."
 fi
