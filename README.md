@@ -4,11 +4,11 @@
 
 ### Activities
 
-####Logs of forensics, fuzzing, and static analysis
+###Logs of forensics, fuzzing, and static analysis
 
-####Logs of fuzzing
+###Logs of fuzzing
 
-####Logs of static analysis
+###Logs of static analysis
 
 
 
