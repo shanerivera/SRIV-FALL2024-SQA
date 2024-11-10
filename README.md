@@ -1,7 +1,15 @@
 # Forensic Anti-patterns in Machine Learning Engineering 
 
-## Farzana Ahmed Bhuiyan and Akond Rahman 
+## Shane Rivera
 
-### Details 
+### Activities
 
-> Demo video for the work in progress: https://drive.google.com/file/d/14lcIbDCIfHu8chqEOS7IX-yEckDFjT8z/view?usp=sharing
+####Logs of forensics, fuzzing, and static analysis
+
+####Logs of fuzzing
+
+####Logs of static analysis
+
+
+
+### Lessons Learned
