@@ -6,8 +6,8 @@ on:
       - main
       - 'feature/*'
     # Optionally specify paths to only trigger the action when Python files change
-    paths:
-      - '**/*.py'  # This ensures the action runs only when Python files change
+    #paths:
+      #- '**/*.py'  # This ensures the action runs only when Python files change
 
 jobs:
   bandit:
