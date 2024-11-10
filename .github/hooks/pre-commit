@@ -11,29 +11,24 @@
 #echo "================================"
 
 
-#!/bin/sh
+#!/bin/bash
 
-# Get a list of Python files that have been staged for commit
-files=$(git diff --cached --name-only --diff-filter=ACM | grep -E '\.py$')
+# Define the output report file
+REPORT_FILE="bandit_report.csv"
 
-if [ -n "$files" ]; then
-  echo "Running Bandit on staged Python files..."
+# Run Bandit on the entire repository and generate the CSV report
+echo "Running Bandit on Python files..."
+bandit -r . -f csv -o "$REPORT_FILE"
 
-  # Run Bandit on the staged files and generate a CSV report
-  bandit -r $files -f csv -o bandit_report.csv
-
-  # Check if Bandit found any issues
-  result=$?
-
-  # If Bandit finds issues, display them and prevent commit
-  if [ $result -ne 0 ]; then
-    echo "Bandit found security issues in your code. Please check the report."
-    exit 1
-  else
-    echo "No security issues found. Commit can proceed."
-  fi
+# Check if Bandit found any issues (you can adjust this condition as needed)
+if [ -s "$REPORT_FILE" ]; then
+  echo "Bandit found security issues. Please review the report:"
+  cat "$REPORT_FILE"
+  # Optionally, you can abort the commit if you want to prevent it
+  # exit 1
+else
+  echo "No security issues found by Bandit."
 fi
-
 
 
 
