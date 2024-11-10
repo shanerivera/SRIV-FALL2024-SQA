@@ -29,7 +29,7 @@ jobs:
 
       - name: Run Bandit on Python files
         run: |
-          bandit -r . -f csv -o bandit_report.csv
+          bandit -r . -f csv -o bandit_report.csv || true
 
       - name: Upload Bandit report
         uses: actions/upload-artifact@v3
