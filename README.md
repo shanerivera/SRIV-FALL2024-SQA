@@ -1,6 +1,6 @@
-# Forensic Anti-patterns in Machine Learning Engineering 
+# Team Name: SRIV
 
-## Shane Rivera
+## Team Members: Shane Rivera
 
 ### Activities
 
