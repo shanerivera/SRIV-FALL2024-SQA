@@ -10,6 +10,9 @@
 #echo "Finished code scanning with static analysis tool"
 #echo "================================"
 
+echo "==============================================================="
+echo "Started pre-commit with bandit security analysis"
+echo "==============================================================="
 
 #!/bin/bash
 
@@ -30,6 +33,9 @@ else
   echo "No security issues found by Bandit."
 fi
 
+echo "==============================================================="
+echo "Finished bandit security analysis / pre-commit check"
+echo "==============================================================="
 
 
 
