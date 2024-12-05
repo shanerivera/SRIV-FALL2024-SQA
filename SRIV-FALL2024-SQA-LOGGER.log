@@ -1,0 +1,5 @@
+2024-12-04 20:24:20,519:7 is odd
+2024-12-04 20:24:20,520:IndexError: list index out of range - Invalid index 5
+2024-12-04 20:24:20,520:ZeroDivisionError: division by zero - Cannot divide 10 by zero
+2024-12-04 20:24:20,520:Warning: 150 exceeds the threshold of 100
+2024-12-04 20:24:20,521:TypeError: can only concatenate str (not "int") to str - Unsupported operation between types

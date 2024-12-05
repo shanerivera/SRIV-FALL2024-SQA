@@ -1,4 +1,4 @@
-name: Codacy Analysis Workshop9 for IaCTesting
+name: Codacy Analysis for SQA Project
 
 on: ["push"]
 
