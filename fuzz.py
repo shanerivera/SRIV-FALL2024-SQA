@@ -1,3 +1,6 @@
+# Shane Rivera
+# Fuzzing 5 Python Methods
+
 import random
 import string
 

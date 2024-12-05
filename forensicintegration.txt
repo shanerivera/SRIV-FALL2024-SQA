@@ -1,0 +1,98 @@
+# Python Methods after forensics integration in mining.py
+
+
+
+# Start of Forensics Integration.
+
+FORENSIC_LOG_FILE = "forensic_log.txt"
+
+def log_forensic_event(event):
+    """Log forensic events to a file."""
+    timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    with open(FORENSIC_LOG_FILE, 'a') as log_file:
+        log_file.write(f"{timestamp} - {event}\n")
+
+def giveTimeStamp():
+    tsObj = time.time()
+    strToret = datetime.fromtimestamp(tsObj).strftime('%Y-%m-%d %H:%M:%S')
+    log_forensic_event(f"Timestamp generated: {strToret}")
+    return strToret
+
+def deleteRepo(dirName, type_):
+    log_forensic_event(f"Attempting to delete directory: {dirName}, type: {type_}")
+    print(':::' + type_ + ':::Deleting ', dirName)
+    try:
+        if os.path.exists(dirName):
+            shutil.rmtree(dirName)
+            log_forensic_event(f"Directory deleted: {dirName}")
+        else:
+            log_forensic_event(f"Directory does not exist: {dirName}")
+    except OSError as e:
+        log_forensic_event(f"Failed to delete directory: {dirName}, error: {e}")
+        print('Failed deleting, will try manually')
+
+def dumpContentIntoFile(strP, fileP):
+    try:
+        with open(fileP, 'w') as fileToWrite:
+            fileToWrite.write(strP)
+        file_size = os.stat(fileP).st_size
+        log_forensic_event(f"Content dumped into file: {fileP}, size: {file_size} bytes")
+        return str(file_size)
+    except Exception as e:
+        log_forensic_event(f"Failed to write content into file: {fileP}, error: {e}")
+        return "0"
+
+def makeChunks(the_list, size_):
+    log_forensic_event(f"Creating chunks of size {size_} for list of length {len(the_list)}")
+    try:
+        for i in range(0, len(the_list), size_):
+            chunk = the_list[i:i+size_]
+            log_forensic_event(f"Chunk created: {chunk}")
+            yield chunk
+    except Exception as e:
+        log_forensic_event(f"Failed to create chunks, error: {e}")
+
+def cloneRepo(repo_name, target_dir):
+    cmd_ = "git clone " + repo_name + " " + target_dir
+    log_forensic_event(f"Attempting to clone repo: {repo_name} into directory: {target_dir}")
+    try:
+        subprocess.check_output(['bash', '-c', cmd_])
+        log_forensic_event(f"Successfully cloned repo: {repo_name}")
+    except subprocess.CalledProcessError as e:
+        log_forensic_event(f"Failed to clone repo: {repo_name}, error: {e}")
+        print('Skipping this repo ... trouble cloning repo:', repo_name)
+
+def checkPythonFile(path2dir):
+    usageCount = 0
+    patternDict = ['sklearn', 'h5py', 'gym', 'rl', 'tensorflow', 'keras', 'tf', 'stable_baselines', 'tensorforce', 'rl_coach', 'pyqlearning', 'MAMEToolkit', 'chainer', 'torch', 'chainerrl']
+    log_forensic_event(f"Checking Python files in directory: {path2dir}")
+    try:
+        for root_, dirnames, filenames in os.walk(path2dir):
+            for file_ in filenames:
+                full_path_file = os.path.join(root_, file_)
+                if os.path.exists(full_path_file):
+                    if file_.endswith(('py', 'ipynb')):
+                        with open(full_path_file, 'r', encoding='latin-1') as f:
+                            pythonFileContent = f.read().lower().split('\n')
+                        for content_ in pythonFileContent:
+                            for item_ in patternDict:
+                                if item_ in content_:
+                                    usageCount += 1
+                                    log_forensic_event(f"Pattern match: {item_} in file: {full_path_file}, line: {content_}")
+    except Exception as e:
+        log_forensic_event(f"Error checking Python files in directory: {path2dir}, error: {e}")
+    log_forensic_event(f"Total pattern matches found: {usageCount}")
+    return usageCount
+
+def days_between(d1_, d2_):
+    try:
+        days_diff = abs((d2_ - d1_).days)
+        log_forensic_event(f"Days between {d1_} and {d2_}: {days_diff}")
+        return days_diff
+    except Exception as e:
+        log_forensic_event(f"Error calculating days between {d1_} and {d2_}, error: {e}")
+        return -1
+        
+
+
+# Forensics Integration Ends Here.

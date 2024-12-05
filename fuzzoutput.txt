@@ -1,0 +1,65 @@
+Testing len(None)
+Error when calling len() with None: object of type 'NoneType' has no len()
+Testing len(123)
+Error when calling len() with 123: object of type 'int' has no len()
+Testing len(45.6)
+Error when calling len() with 45.6: object of type 'float' has no len()
+Testing len({})
+0
+Testing len([])
+0
+Testing len(<object object at 0x7f7b03a303f0>)
+Error when calling len() with <object object at 0x7f7b03a303f0>: object of type 'object' has no len()
+Testing len(valid string)
+12
+Testing len(                                       )
+39
+Testing int(123)
+123
+Testing int(invalid)
+Error when calling int() with invalid: invalid literal for int() with base 10: 'invalid'
+Testing int(0)
+0
+Testing int(1.2)
+Error when calling int() with 1.2: invalid literal for int() with base 10: '1.2'
+Testing int(None)
+Error when calling int() with None: int() argument must be a string, a bytes-like object or a real number, not 'NoneType'
+Testing int()
+Error when calling int() with : invalid literal for int() with base 10: ''
+Testing int(<object object at 0x7f7b03a303f0>)
+Error when calling int() with <object object at 0x7f7b03a303f0>: int() argument must be a string, a bytes-like object or a real number, not 'object'
+Testing str(None)
+None
+Testing str(123)
+123
+Testing str(45.6)
+45.6
+Testing str({})
+{}
+Testing str([])
+[]
+Testing str(<object object at 0x7f7b03a303f0>)
+<object object at 0x7f7b03a303f0>
+Testing open(testfile.txt)
+Testing open(None)
+Error when calling open() with None: expected str, bytes or os.PathLike object, not NoneType
+Testing open(123)
+Error when calling open() with 123: [Errno 9] Bad file descriptor
+Testing open(invalid/file/path)
+Error when calling open() with invalid/file/path: [Errno 2] No such file or directory: 'invalid/file/path'
+Testing open(<object object at 0x7f7b03a303f0>)
+Error when calling open() with <object object at 0x7f7b03a303f0>: expected str, bytes or os.PathLike object, not object
+Testing append(None) to empty list
+[None]
+Testing append(123) to empty list
+[123]
+Testing append(45.6) to empty list
+[45.6]
+Testing append({}) to empty list
+[{}]
+Testing append([]) to empty list
+[[]]
+Testing append(<object object at 0x7f7b03a303f0>) to empty list
+[<object object at 0x7f7b03a303f0>]
+Testing append(random string) to empty list
+['random string']
